@@ -3,9 +3,9 @@ import java.util.*;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class RegLinear {
-    private Double taxa;
-    private Double coefA;
-    private Double coefB;
+    private double taxa;
+    private double coefA;
+    private double coefB;
     private final ArrayList<Point2D> base;
     private final ArrayList<Point2D> points1;
     private final ArrayList<Point2D> points2;
@@ -21,7 +21,7 @@ public class RegLinear {
         this.points2.add(pt2);
     }
 
-    public Double getTaxa() {
+    public double getTaxa() {
         return taxa;
     }
 
@@ -29,19 +29,19 @@ public class RegLinear {
         this.taxa = taxa;
     }
 
-    public Double getCoefA() {
+    public double getCoefA() {
         return coefA;
     }
 
-    public void setCoefA(Double coefA) {
+    public void setCoefA(double coefA) {
         this.coefA = coefA;
     }
 
-    public Double getCoefB() {
+    public double getCoefB() {
         return coefB;
     }
 
-    public void setCoefB(Double coefB) {
+    public void setCoefB(double coefB) {
         this.coefB = coefB;
     }
 
@@ -57,7 +57,31 @@ public class RegLinear {
         return points2;
     }
 
-    public void Calculo() {
+    public String getPoint1(int i) {
+        return "(" + getPoints1().get(i).getX() + ", " + getPoints1().get(i).getY() + ")";
+    }
+
+    public String getPoint2(int i) {
+        return "(" + getPoints2().get(i).getX() + ", " + getPoints2().get(i).getY() + ")";
+    }
+
+    private void calculaNovaReta() {
+        Point2D newPt1 = new Point2D.Double();
+        Point2D newPt2 = new Point2D.Double();
+        double x1 = points1.get(0).getX();
+        double x2 = points2.get(0).getX();
+        double y1, y2;
+
+        y1 = x1 * coefA + coefB;
+        y2 = x2 * coefA + coefB;
+        newPt1.setLocation(x1, y1);
+        newPt2.setLocation(x2, y2);
+
+        points1.add(newPt1);
+        points2.add(newPt2);
+    }
+
+    public void calculo() {
         double erroMedio;
         ArrayList<Double> erros = new ArrayList<>();
         ArrayList<Double> errosX = new ArrayList<>();
@@ -76,11 +100,12 @@ public class RegLinear {
         errosXSum = errosX.stream().mapToDouble(Double::doubleValue).sum();
         errosQuadSum = errosQuad.stream().mapToDouble(Double::doubleValue).sum();
 
-        coefA = coefA - taxa * (2 / 3) * errosSum;
-        coefB = coefB - taxa * (2 / 3) * errosXSum;
+        coefA = coefA - taxa * (2.0 / 3) * errosSum;
+        coefB = coefB - taxa * (2.0 / 3) * errosXSum;
+        calculaNovaReta();
         erroMedio = errosQuadSum / base.size();
 
-        if (erroMedio > 0)
-            Calculo();
+        if (erroMedio > 0.99)
+            calculo();
     }
 }

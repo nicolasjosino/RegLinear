@@ -12,5 +12,11 @@ public class Main {
         Point2D pt2 = new Point2D.Double(3, 9);
 
         RegLinear r1 = new RegLinear(0.05, 2.0, 3.0, base, pt1, pt2);
+
+        r1.calculo();
+        System.out.println("Retas:");
+        for (int i = 0; i < r1.getPoints1().size(); i++) {
+            System.out.println("reta " + i + ": " + r1.getPoint1(i) + " a " + r1.getPoint2(i));
+        }
     }
 }
