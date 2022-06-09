@@ -15,7 +15,8 @@ public class Main {
 
         r1.calculo();
         System.out.println("Retas:");
-        for (int i = 0; i < r1.getPoints1().size(); i++) {
+        System.out.println("Reta inicial: " + r1.getPoint1(0) + " a " + r1.getPoint2(0));
+        for (int i = 1; i <= r1.getPoints1().size()-1; i++) {
             System.out.println("reta " + i + ": " + r1.getPoint1(i) + " a " + r1.getPoint2(i));
         }
     }

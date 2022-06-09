@@ -100,8 +100,8 @@ public class RegLinear {
         errosXSum = errosX.stream().mapToDouble(Double::doubleValue).sum();
         errosQuadSum = errosQuad.stream().mapToDouble(Double::doubleValue).sum();
 
-        coefA = coefA - taxa * (2.0 / 3) * errosSum;
-        coefB = coefB - taxa * (2.0 / 3) * errosXSum;
+        coefA = coefA - taxa * (2.0 / base.size()) * errosSum;
+        coefB = coefB - taxa * (2.0 / base.size()) * errosXSum;
         calculaNovaReta();
         erroMedio = errosQuadSum / base.size();
 
