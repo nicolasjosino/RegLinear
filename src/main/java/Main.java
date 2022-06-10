@@ -13,10 +13,10 @@ public class Main {
 
         RegLinear r1 = new RegLinear(0.05, 2.0, 3.0, base, pt1, pt2);
 
-        r1.calculo();
+        r1.calculo(0.90);
         System.out.println("Retas:");
         System.out.println("Reta inicial: " + r1.getPoint1(0) + " a " + r1.getPoint2(0));
-        for (int i = 1; i <= r1.getPoints1().size()-1; i++) {
+        for (int i = 1; i <= r1.getPoints1().size() - 1; i++) {
             System.out.println("reta " + i + ": " + r1.getPoint1(i) + " a " + r1.getPoint2(i));
         }
     }

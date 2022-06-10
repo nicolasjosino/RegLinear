@@ -81,7 +81,7 @@ public class RegLinear {
         points2.add(newPt2);
     }
 
-    public void calculo() {
+    public void calculo(double taxaErro) {
         double erroMedio;
         ArrayList<Double> erros = new ArrayList<>();
         ArrayList<Double> errosX = new ArrayList<>();
@@ -105,7 +105,7 @@ public class RegLinear {
         calculaNovaReta();
         erroMedio = errosQuadSum / base.size();
 
-        if (erroMedio > 0.99)
-            calculo();
+        if (erroMedio > taxaErro)
+            calculo(taxaErro);
     }
 }
