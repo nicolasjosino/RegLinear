@@ -3,7 +3,7 @@ import java.util.*;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class RegLinear {
-    private double taxa;
+    private final double taxa;
     private double coefA;
     private double coefB;
     private final ArrayList<Point2D> base;
@@ -23,10 +23,6 @@ public class RegLinear {
 
     public double getTaxa() {
         return taxa;
-    }
-
-    public void setTaxa(Double taxa) {
-        this.taxa = taxa;
     }
 
     public double getCoefA() {
