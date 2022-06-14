@@ -8,6 +8,15 @@ public class Main {
         ArrayList<Point2D> base = new ArrayList<>();
         Scanner user = new Scanner(System.in);
 
+        System.out.print("Digite a taxa de aprendizado: ");
+        double taxaAprendizado = user.nextDouble();
+
+        System.out.println("Digite os coeficientes A e B iniciais:");
+        System.out.print("A: ");
+        double coefA = user.nextDouble();
+        System.out.print("B: ");
+        double coefB = user.nextDouble();
+
         System.out.println("Digite o ponto inicial da primeira reta: ");
         System.out.print("X: ");
         double x1 = user.nextDouble();
@@ -26,10 +35,10 @@ public class Main {
         int n = user.nextInt();
 
         System.out.println("Digite os valores X e Y de cada ponto: ");
-        for (int i = 0; i < n; i++) {
-            System.out.print("X: ");
+        for (int i = 1; i <= n; i++) {
+            System.out.print("X" + i + ": ");
             double x = user.nextDouble();
-            System.out.print("Y: ");
+            System.out.print("Y" + i + ": ");
             double y = user.nextDouble();
             base.add(new Point2D.Double(x, y));
         }
@@ -37,7 +46,7 @@ public class Main {
         System.out.print("Digite a taxa de erro aceita: ");
         double taxaErro = user.nextDouble();
 
-        RegLinear r1 = new RegLinear(0.05, 2.0, 3.0, base, pt1, pt2);
+        RegLinear r1 = new RegLinear(taxaAprendizado, coefA, coefB, base, pt1, pt2);
         r1.calculo(taxaErro);
 
         System.out.println("Retas:");
