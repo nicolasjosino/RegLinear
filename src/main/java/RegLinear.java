@@ -78,11 +78,10 @@ public class RegLinear {
     }
 
     public void calculo(double taxaErro) {
-        double erroMedio;
         ArrayList<Double> erros = new ArrayList<>();
         ArrayList<Double> errosX = new ArrayList<>();
         ArrayList<Double> errosQuad = new ArrayList<>();
-        double errosSum, errosXSum, errosQuadSum;
+        double errosSum, errosXSum, errosQuadSum, erroMedio;
 
         for (Point2D pt : base) {
             double predicao = pt.getX() * coefA + coefB;
