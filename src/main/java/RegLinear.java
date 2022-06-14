@@ -77,11 +77,11 @@ public class RegLinear {
         points2.add(newPt2);
     }
 
-    public void calculo(double taxaErro) {
+    public void calculo(double taxaErro, double erroMedio) {
         ArrayList<Double> erros = new ArrayList<>();
         ArrayList<Double> errosX = new ArrayList<>();
         ArrayList<Double> errosQuad = new ArrayList<>();
-        double errosSum, errosXSum, errosQuadSum, erroMedio;
+        double errosSum, errosXSum, errosQuadSum, erroMedioAnterior;
 
         for (Point2D pt : base) {
             double predicao = pt.getX() * coefA + coefB;
@@ -98,9 +98,12 @@ public class RegLinear {
         coefA = coefA - taxa * (2.0 / base.size()) * errosSum;
         coefB = coefB - taxa * (2.0 / base.size()) * errosXSum;
         calculaNovaReta();
+        erroMedioAnterior = erroMedio;
         erroMedio = errosQuadSum / base.size();
 
-        if (erroMedio > taxaErro)
-            calculo(taxaErro);
+        if ((erroMedio < erroMedioAnterior)) {
+            if (erroMedio > taxaErro)
+                calculo(taxaErro, erroMedio);
+        }
     }
 }
