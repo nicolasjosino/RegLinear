@@ -25,18 +25,14 @@ public class Main {
             System.out.print("B: ");
             coefB = user.nextDouble();
 
-            System.out.println("Digite o ponto inicial da primeira reta: ");
-            System.out.print("X: ");
+            System.out.print("Digite a coordenada X do ponto inicial da primeira reta: ");
             double x1 = user.nextDouble();
-            System.out.print("Y: ");
-            double y1 = user.nextDouble();
+            double y1 = x1 * coefA + coefB;
             pt1 = new Point2D.Double(x1, y1);
 
-            System.out.println("Digite o ponto final da primeira reta: ");
-            System.out.print("X: ");
+            System.out.print("Digite a coordenada X do ponto final da primeira reta: ");
             double x2 = user.nextDouble();
-            System.out.print("Y: ");
-            double y2 = user.nextDouble();
+            double y2 = x2 * coefA + coefB;
             pt2 = new Point2D.Double(x2, y2);
 
             System.out.print("Digite a quantidade de pontos da base: ");
@@ -61,11 +57,5 @@ public class Main {
 
         RegLinear r1 = new RegLinear(taxaAprendizado, coefA, coefB, base, pt1, pt2);
         r1.calculo(taxaErro, 0);
-
-        System.out.println("Retas:");
-        System.out.println("Reta inicial: " + r1.getPoint1(0) + " a " + r1.getPoint2(0));
-        for (int i = 1; i <= r1.getPoints1().size() - 1; i++) {
-            System.out.println("reta " + i + ": " + r1.getPoint1(i) + " a " + r1.getPoint2(i));
-        }
     }
 }
