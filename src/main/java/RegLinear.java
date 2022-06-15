@@ -67,6 +67,7 @@ public class RegLinear {
         double x1 = points1.get(0).getX();
         double x2 = points2.get(0).getX();
         double y1, y2;
+        int i = points1.size()-1;
 
         y1 = x1 * coefA + coefB;
         y2 = x2 * coefA + coefB;
@@ -75,13 +76,14 @@ public class RegLinear {
 
         points1.add(newPt1);
         points2.add(newPt2);
+        System.out.println("reta " + i + ": " + getPoint1(i) + " a " + getPoint2(i));
     }
 
-    public void calculo(double taxaErro) {
+    public void calculo(double taxaErro, double erroMedio) {
         ArrayList<Double> erros = new ArrayList<>();
         ArrayList<Double> errosX = new ArrayList<>();
         ArrayList<Double> errosQuad = new ArrayList<>();
-        double errosSum, errosXSum, errosQuadSum, erroMedio;
+        double errosSum, errosXSum, errosQuadSum, erroMedioAnterior;
 
         for (Point2D pt : base) {
             double predicao = pt.getX() * coefA + coefB;
@@ -98,9 +100,18 @@ public class RegLinear {
         coefA = coefA - taxa * (2.0 / base.size()) * errosSum;
         coefB = coefB - taxa * (2.0 / base.size()) * errosXSum;
         calculaNovaReta();
+        erroMedioAnterior = erroMedio;
         erroMedio = errosQuadSum / base.size();
 
-        if (erroMedio > taxaErro)
-            calculo(taxaErro);
+        if ((erroMedio > erroMedioAnterior) && (erroMedioAnterior != 0)){
+            System.out.println("Erro médio começou a aumentar, encerrando...");
+            System.out.println("Erro médio anterior: " + erroMedioAnterior);
+            System.out.println("Erro médio: " + erroMedio);
+            System.exit(1);
+        }
+        else if (erroMedio > taxaErro)
+            calculo(taxaErro, erroMedio);
+        else
+            System.out.println("Erro médio final: " + erroMedio);
     }
 }
